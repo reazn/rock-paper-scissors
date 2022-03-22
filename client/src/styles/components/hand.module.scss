@@ -1,0 +1,38 @@
+.hand {
+    width: 0;
+
+    .playerOne {
+        -webkit-filter: drop-shadow(20px 20px 4px rgba(0, 0, 0, 0.25));
+        filter: drop-shadow(20px 20px 4px rgba(0, 0, 0, 0.25));
+        transform-origin: left;
+        --scale: 1;
+        animation: bounce 1s ease-in-out infinite;
+    }
+
+    .playerTwo {
+        -webkit-filter: drop-shadow(-20px -20px 4px rgba(0, 0, 0, 0.25));
+        filter: drop-shadow(-20px 20px 4px rgba(0, 0, 0, 0.25));
+        transform-origin: left;
+        --scale: -1;
+        animation: bounce 1s ease-in-out infinite;
+    }
+
+    .image {
+        width: clamp(300px, 50vw, 2500px);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(var(--scale)) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(var(--scale)) rotate(-30deg);
+    }
+    100% {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(var(--scale)) rotate(0deg);
+    }
+}
