@@ -1,70 +1,39 @@
-import React, { useEffect, useState, useRef } from "react";
-import Hand from "components/Hand";
+import React, { useEffect, useState } from "react";
+import { Hand, Scoreboard } from "components";
+import Menu from "pages/Menu";
+
 import style from "style/app.module.scss";
 import "style/global.scss";
-import { SocketContext, socket } from "./context/socket";
-// import io from "socket.io-client";
-// const socket = io("ws://localhost:6969");
-
-// let path = location.pathname.split("/");
-// path = path[path.length - 1];
+import { socket } from "./context/socket";
 
 export default function App() {
 
-    // const [names, setName] = useState()
-    // const [didRedirect, redirect] = useState(false);
-    // const socket = useRef(io("ws://localhost:6969"))
+    const [players, setPlayers] = useState([])
 
-    // useEffect(() => {
-
-
-
-    // if (path) {
-    //     socket.emit("join-room", (path));
-    //     console.log(path, "was path")
-    // }
-    // } else {
-    // if (didRedirect === false) {
-    //     socket.emit("create-room")
-    // }
-    // }
-
-    // socket.on("no-room", () => {
-    //     // socket.emit("create-room")
-    //     console.log("no room")
-    // })
-
-    // socket.on("room-code", (code) => {
-    //     console.log("room code: ", code)
-    //     redirect(true);
-    //     console.log(didRedirect, "did redirect?")
-    //     location.pathname = code;
-    //     // window.history.replaceState(null, "test", `/ddddd${code}`)
-    // })
-
-    // socket.on("game", (res) => {
-    //     console.log(JSON.parse(res));
-    // })
-
-    // socket.on("full", () => {
-    //     console.log("Room is full")
-    // })
-
-    // })
+    useEffect(() => {
+        socket.on("players", playerData => {
+            setPlayers(playerData)
+            // players = playerData;
+            console.log("player connected on begin", players)
+        })
+    }, [setPlayers])
 
     return (
-        <SocketContext.Provider value={socket}>
+        <>
+            <Scoreboard />
             <div className={style.hands}>
                 <Hand left={true} type="paper" />
                 <Hand left={false} type="rock" />
             </div>
             <div className={style.names}>
-                <span>hi</span>
+                <Menu />
+                <span>{JSON.stringify(players)}</span>
                 <span></span>
                 <input type="text"></input>
                 <button onClick={() => socket.emit("getinfo")}>getinfo</button>
                 <button onClick={() => console.log(didRedirect)}>isPath</button>
             </div>
-        </SocketContext.Provider>
+        </>
+
     );
 }
