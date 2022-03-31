@@ -19,8 +19,8 @@ io.on("connection", client => {
     client.on("create-room", () => {
         let room = newId()
 
-        rooms[client.id] = room;
         client.emit("room-code", room)
+        rooms[client.id] = room;
 
         state[room] = {
             players: {
@@ -34,7 +34,8 @@ io.on("connection", client => {
         console.log("game created with code: ", room)
     })
 
-    client.on("join-room", (room, user) => {
+    client.on("join-room", (room) => {
+        room = room.toUpperCase();
         let getRoom = io.sockets.adapter.rooms.get(room);
 
         let numClients = 0;
@@ -53,6 +54,7 @@ io.on("connection", client => {
         rooms[client.id] = room;
         Object.assign(state[room].players, { [client.id]: { name: "player2", score: 0 } })
         client.join(room)
+        console.log("game joined with code: ", room)
         // console.log(room, " room")
         // console.log(client.rooms)
 
@@ -63,6 +65,7 @@ io.on("connection", client => {
     client.on("getinfo", () => {
         console.log(state[rooms[client.id]])
         console.log(state[rooms])
+        console.log(state)
     })
 
     client.on("disconnect", () => {
