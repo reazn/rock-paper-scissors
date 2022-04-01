@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Hand, Scoreboard } from "components";
+import { Hand, Scoreboard, Roomcode } from "components";
 import Menu from "pages/Menu";
+import Picker from "pages/Picker";
 
 import style from "style/app.module.scss";
 import "style/global.scss";
@@ -20,11 +21,13 @@ export default function App() {
 
     return (
         <>
+            <Roomcode />
             <Scoreboard />
             <div className={style.hands}>
                 <Hand left={true} type="paper" />
                 <Hand left={false} type="rock" />
             </div>
+            <Picker />
             <div className={style.names}>
                 <Menu />
                 <span>{JSON.stringify(players)}</span>
