@@ -1,7 +1,8 @@
 .picker {
     position: absolute;
-    bottom: 0;
+    bottom: -100%;
     width: 100%;
+    transition: bottom 0.5s ease-in-out;
 
     .options {
         display: flex;
@@ -16,9 +17,13 @@
 
             &:hover {
                 transform: translateY(-30%) rotate(-90deg);
-                filter: drop-shadow(-60px 30px 4px rgba(0, 0, 0, 0.25));
+                filter: drop-shadow(-60px 20px 4px rgba(0, 0, 0, 0.25));
                 cursor: pointer;
             }
         }
     }
+}
+
+.active {
+    bottom: 0;
 }

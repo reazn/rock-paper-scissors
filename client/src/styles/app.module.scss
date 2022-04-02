@@ -1,9 +1,10 @@
 .hands {
+    position: absolute;
+    // top: 0;
+    left: -20%;
     width: 140%;
-    height: 100%;
-    margin-left: -20%;
+    height: 60%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 

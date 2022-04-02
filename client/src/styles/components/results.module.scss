@@ -1,0 +1,27 @@
+.results {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 4rem;
+        text-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+
+        transform: scale(0);
+        opacity: 0;
+        transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    }
+
+    .active {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

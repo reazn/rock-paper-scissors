@@ -110,13 +110,16 @@ io.on("connection", client => {
             }
 
             console.log(winner, "won")
-            io.to(rooms[client.id]).emit("rps-winner", winner);
+            io.to(rooms[client.id]).emit("rps-winner", winner.name);
 
             playerOne.choice = "";
             playerTwo.choice = "";
-
-            io.to(rooms[client.id]).emit("players", state[rooms[client.id]], rooms[client.id]);
         }
+    })
+
+    client.on("rps-reset", () => {
+        if (!state[rooms[client.id]]) return;
+        io.to(rooms[client.id]).emit("players", state[rooms[client.id]], rooms[client.id]);
 
     })
 
