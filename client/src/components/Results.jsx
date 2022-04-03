@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
-import { socket } from "../context/socket";
+import React from "react";
 import style from "style/components/results.module.scss";
 
-export default function Results({ winner }) {
+export default function Results({ winner, draw }) {
 
     return (
         <div className={style.results}>
             <div className={[style.wrapper, winner ? style.active : ""].join(" ")}>
-                <span className={style.winner}>{winner}</span>
-                <span>won!</span>
+                {draw ? <span>it's a</span> : ""}
+                <span>{winner}{draw ? "!" : ""}</span>
+                {draw ? "" : <span>won!</span>}
             </div>
-        </div>
+        </div >
     )
 }

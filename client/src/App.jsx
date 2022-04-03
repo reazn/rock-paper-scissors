@@ -16,8 +16,7 @@ export default function App() {
     useEffect(() => {
         socket.on("players", (playerData, room) => {
             setPlayers(playerData);
-            setRoom(room)
-            console.log("player connected on begin", players)
+            setRoom(room);
         })
 
         socket.on("rps-winner", (gameWinner) => {
@@ -25,8 +24,8 @@ export default function App() {
                 setWinner(gameWinner);
                 setTimeout(() => {
                     setWinner("");
-                    socket.emit("rps-reset")
-                }, 3000)
+                    socket.emit("rps-reset");
+                }, 3000);
             }, 3000);
         })
     });
@@ -34,17 +33,19 @@ export default function App() {
     let playerOne, playerTwo;
 
     if (Object.keys(players.players).length >= 1) {
-        playerOne = Object.entries(players.players)[0][1]
+        playerOne = Object.entries(players.players)[0][1];
 
         if (Object.keys(players.players).length === 2) {
-            playerTwo = Object.entries(players.players)[1][1]
+            playerTwo = Object.entries(players.players)[1][1];
         }
     }
 
     return (
         <>
-            {/* todo - draw */}
-            <Results winner={winner} />
+            <Results
+                winner={winner === "draw" ? "draw" : winner.name}
+                draw={winner === "draw" ? true : false}
+            />
             <Roomcode code={room} />
             <Scoreboard playerOne={playerOne} playerTwo={playerTwo} />
 
