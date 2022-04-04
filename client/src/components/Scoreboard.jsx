@@ -4,7 +4,7 @@ import style from "style/components/scoreboard.module.scss";
 export default function Scoreboard({ playerOne, playerTwo }) {
 
     return (
-        <div className={style.scoreboard}>
+        <div className={[style.scoreboard, playerOne || playerTwo ? style.active : ""].join(" ")}>
             <div className={style.players}>
                 <div className={style.player}>
                     <span className={style.name}>{playerOne?.name || "Waiting..."}</span>
