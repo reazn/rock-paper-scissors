@@ -6,13 +6,11 @@ export default function Roomcode({ code }) {
 
     return (
         <>
-            {code ?
-                <div className={style.roomcode} onClick={() => navigator.clipboard.writeText(code)}>
-                    <span className={style.code}>{code}</span>
-                    <Clipboard className={style.icon} />
-                </div>
-                : ""
-            }
+            <div className={[style.roomcode, code ? style.active : ""].join(" ")} onClick={() => navigator.clipboard.writeText(code)}>
+                <span className={style.code}>{code ? code : "error"}</span>
+                <Clipboard className={style.icon} />
+            </div>
+
         </>
     );
 }
