@@ -129,7 +129,7 @@ io.on("connection", client => {
             }
 
             delete state[rooms[client.id]].players[client.id];
-            io.to(room).emit("players", state[rooms[client.id]]);
+            io.to(room).emit("players", state[rooms[client.id]], rooms[client.id]);
             delete rooms[client.id];
         }
     })
