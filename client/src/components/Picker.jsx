@@ -4,11 +4,11 @@ import { socket } from "../context/socket";
 
 export default function Picker({ active, color = "yellow" }) {
 
-    const [isActive, setActive] = useState(active);
+    const [isActive, setActive] = useState(true);
 
     function choice(type) {
         socket.emit("rps-choice", type);
-        setActive(false);
+        // setActive(false);
     }
 
     return (
@@ -17,17 +17,17 @@ export default function Picker({ active, color = "yellow" }) {
                 <img
                     onClick={() => choice("rock")}
                     className={style.image}
-                    src={`/images/${color}-rock.png`}
+                    src={`/images/hands/${color}-rock.png`}
                 />
                 <img
                     onClick={() => choice("paper")}
                     className={style.image}
-                    src={`/images/${color}-paper.png`}
+                    src={`/images/hands/${color}-paper.png`}
                 />
                 <img
                     onClick={() => choice("scissors")}
                     className={style.image}
-                    src={`/images/${color}-scissors.png`}
+                    src={`/images/hands/${color}-scissors.png`}
                 />
             </div>
         </div>
