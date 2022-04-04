@@ -2,7 +2,7 @@
     .playerOne {
         position: absolute;
         left: 0;
-        filter: drop-shadow(20px 20px 4px rgba(0, 0, 0, 0.25));
+        filter: drop-shadow(20px 20px 2px rgba(0, 0, 0, 0.25));
         transform-origin: left;
         --scale: 1;
         transition: left 0.5s ease-in-out;
@@ -11,7 +11,7 @@
     .playerTwo {
         position: absolute;
         right: -50vw;
-        filter: drop-shadow(-20px 20px 4px rgba(0, 0, 0, 0.25));
+        filter: drop-shadow(-20px 20px 2px rgba(0, 0, 0, 0.25));
         transform-origin: left;
         --scale: -1;
         transition: right 0.5s ease-in-out;

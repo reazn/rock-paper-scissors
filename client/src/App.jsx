@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { socket } from "./context/socket";
 import style from "style/app.module.scss";
 
@@ -12,6 +12,7 @@ export default function App() {
     const [players, setPlayers] = useState({ players: {} });
     const [winner, setWinner] = useState("");
     const [room, setRoom] = useState("");
+    const [color, setColor] = useState(undefined);
 
     useEffect(() => {
         socket.on("players", (playerData, room) => {
@@ -40,6 +41,10 @@ export default function App() {
         }
     }
 
+    const callback = useCallback((colors) => {
+        setColor(colors)
+    }, [])
+
     return (
         <>
             <Results
@@ -52,21 +57,25 @@ export default function App() {
             <div className={style.hands}>
                 <Hand
                     left={true}
+                    color={playerOne?.color}
                     type={winner ? playerOne?.choice : "rock"}
                     active={playerOne?.choice ? true : false}
                     moving={playerOne?.choice && playerTwo?.choice ? (winner ? false : true) : false}
                 />
                 <Hand
                     left={false}
+                    color={playerTwo?.color}
                     type={winner ? playerTwo?.choice : "rock"}
                     active={playerTwo?.choice ? true : false}
                     moving={playerOne?.choice && playerTwo?.choice ? (winner ? false : true) : false}
                 />
             </div>
 
-            <Picker />
+            <Picker color={color} active={!winner} />
+            {console.log(winner)}
+
+            <Menu parentCallback={callback} />
             <div className={style.names}>
-                <Menu />
                 <span>{JSON.stringify(players)}</span>
                 <span></span>
                 <input type="text"></input>

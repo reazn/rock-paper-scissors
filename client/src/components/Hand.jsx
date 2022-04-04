@@ -1,17 +1,9 @@
 import React from "react";
 import style from "style/components/hand.module.scss";
 
-export default function Hand({ type = "rock", left, active, moving = false }) {
+export default function Hand({ type = "rock", left, color = "yellow", active, moving = false }) {
 
-    let activeHand;
-
-    if (left) {
-        activeHand = style.activeLeft
-    }
-
-    if (!left) {
-        activeHand = style.activeRight
-    }
+    let activeHand = left ? style.activeLeft : style.activeRight;
 
     return (
         <div className={style.hand}>
@@ -21,7 +13,7 @@ export default function Hand({ type = "rock", left, active, moving = false }) {
                 moving ? style.moving : "",
                 active ? "" : activeHand,
             ].join(" ")}
-                src={`/images/${type}.png`} />
+                src={`/images/${color}-${type}.png`} />
         </div>
     );
 }

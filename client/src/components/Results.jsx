@@ -8,7 +8,7 @@ export default function Results({ winner, draw }) {
             <div className={[style.wrapper, winner ? style.active : ""].join(" ")}>
                 {draw ? <span>it's a</span> : ""}
                 <span>{winner}{draw ? "!" : ""}</span>
-                {draw ? "" : <span>won!</span>}
+                {!draw ? "" : <span>won!</span>}
             </div>
         </div >
     )
