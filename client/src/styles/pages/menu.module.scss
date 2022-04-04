@@ -1,46 +1,13 @@
 .hide {
     display: none;
 }
+
 .menu {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: #392C87;
     z-index: 1;
     overflow-y: auto;
-    // overflow-x: auto;
-
-    .background {
-        .pattern {
-            background-color: #433593;
-            position: fixed;
-            z-index: -1;
-        }
-
-        .pattern:nth-child(1) {
-            top: -20%;
-            left: -100%;
-            width: 200%;
-            height: 50%;
-            transform: rotate(-30deg);
-        }
-
-        .pattern:nth-child(2) {
-            bottom: 20%;
-            left: -50%;
-            width: 200%;
-            height: 50%;
-            transform: rotate(-15deg);
-        }
-
-        .pattern:nth-child(3) {
-            bottom: -35%;
-            right: -100%;
-            width: 200%;
-            height: 50%;
-            transform: rotate(-25deg);
-        }
-    }
 
     .title {
         text-transform: uppercase;

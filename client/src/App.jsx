@@ -29,7 +29,7 @@ export default function App() {
                 }, 3000);
             }, 3000);
         })
-    });
+    }, []);
 
     let playerOne, playerTwo;
 
@@ -47,10 +47,16 @@ export default function App() {
 
     return (
         <>
+            <div className={style.background}>
+                <div className={style.pattern}></div>
+                <div className={style.pattern}></div>
+                <div className={style.pattern}></div>
+            </div>
             <Results
-                winner={winner === "draw" ? "draw" : winner.name}
+                winner={winner}
                 draw={winner === "draw" ? true : false}
             />
+
             <Roomcode code={room} />
             <Scoreboard playerOne={playerOne} playerTwo={playerTwo} />
 
@@ -71,17 +77,9 @@ export default function App() {
                 />
             </div>
 
-            <Picker color={color} active={!winner} />
-            {console.log(winner)}
-
+            <Picker color={color} active={winner} />
             <Menu parentCallback={callback} />
-            <div className={style.names}>
-                <span>{JSON.stringify(players)}</span>
-                <span></span>
-                <input type="text"></input>
-                <button onClick={() => socket.emit("getinfo")}>getinfo</button>
-                <button onClick={() => console.log(didRedirect)}>isPath</button>
-            </div>
+            {/* <span className={style.names}>{JSON.stringify(players)}</span> */}
         </>
 
     );

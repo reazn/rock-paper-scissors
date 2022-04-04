@@ -1,3 +1,35 @@
+.background {
+    .pattern {
+        background-color: #433593;
+        position: fixed;
+        z-index: 0;
+    }
+
+    .pattern:nth-child(1) {
+        top: -20%;
+        left: -100%;
+        width: 200%;
+        height: 50%;
+        transform: rotate(-30deg);
+    }
+
+    .pattern:nth-child(2) {
+        bottom: 20%;
+        left: -50%;
+        width: 200%;
+        height: 50%;
+        transform: rotate(-15deg);
+    }
+
+    .pattern:nth-child(3) {
+        bottom: -35%;
+        right: -100%;
+        width: 200%;
+        height: 50%;
+        transform: rotate(-25deg);
+    }
+}
+
 .hands {
     position: absolute;
     top: 0;
@@ -6,7 +38,6 @@
     height: 60%;
     display: flex;
     align-items: center;
-    z-index: 0;
 }
 
 .names {
