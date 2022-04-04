@@ -15,11 +15,11 @@ const rooms = {};
 
 io.on("connection", client => {
     console.log(`${client.id} connected`);
-    // console.log(io.sockets.adapter.rooms)
 
-    client.on("create-room", (name) => {
+    client.on("create-room", (name, color) => {
         if (rooms[client.id]) return;
         if (!name) { name = "Player 1" }
+        if (!color) { color = "yellow" }
         let room = newId();
 
         client.emit("room-code", room);
@@ -29,6 +29,7 @@ io.on("connection", client => {
             players: {
                 [client.id]: {
                     name: name,
+                    color: color,
                     score: 0,
                     choice: "",
                 }
@@ -36,14 +37,13 @@ io.on("connection", client => {
         }
 
         client.join(room);
-        console.log("game created with code: ", room);
         io.to(room).emit("players", state[rooms[client.id]], room);
-        console.log(state[rooms[client.id]], "was sent to player");
-        console.log(state, room);
     })
 
-    client.on("join-room", (room, name) => {
+    client.on("join-room", (room, name, color) => {
         if (!name) { name = "Player 2" }
+        if (!color) { color = "yellow" }
+
         let getRoom = io.sockets.adapter.rooms.get(room);
 
         let numClients = 0;
@@ -53,12 +53,10 @@ io.on("connection", client => {
         }
 
         if (numClients === 0) {
-            console.log("room: ", JSON.stringify(getRoom))
-            console.log(`${name} tried to join room ${room} but its doesnt exist`);
             return io.to(client.id).emit("no-room");
         }
+
         if (numClients > 1) {
-            console.log(`${name} tried to join room ${room} but its full`);
             return io.to(client.id).emit("full");
         }
 
@@ -66,16 +64,14 @@ io.on("connection", client => {
         Object.assign(state[room].players, {
             [client.id]: {
                 name: name,
+                color: color,
                 score: 0,
                 choice: "",
             }
         });
 
         client.join(room);
-        console.log("game joined with code: ", room);
-
         io.to(room).emit("players", state[rooms[client.id]], room);
-        console.log(state[rooms[client.id]], "was sent to player");
     })
 
     client.on("getinfo", (word) => {
@@ -88,18 +84,17 @@ io.on("connection", client => {
         console.log(state[rooms[client.id]]?.players)
     })
 
-
     client.on("rps-choice", (choice) => {
         if (!state[rooms[client.id]]) return;
 
         const players = state[rooms[client.id]].players;
+
         Object.assign(players[client.id], { choice: choice });
-        console.log("player chose: ", choice);
+
         io.to(rooms[client.id]).emit("players", state[rooms[client.id]], rooms[client.id]);
 
-        console.log(players)
-        let playerOne = Object.values(players)[0]
-        let playerTwo = Object.values(players)[1]
+        let playerOne = Object.values(players)[0];
+        let playerTwo = Object.values(players)[1];
 
         if (playerOne.choice && playerTwo?.choice) {
 
@@ -109,8 +104,7 @@ io.on("connection", client => {
                 winner.score++;
             }
 
-            console.log(winner, "won")
-            io.to(rooms[client.id]).emit("rps-winner", winner.name);
+            io.to(rooms[client.id]).emit("rps-winner", winner);
 
             playerOne.choice = "";
             playerTwo.choice = "";
@@ -124,7 +118,6 @@ io.on("connection", client => {
     })
 
     client.on("disconnect", () => {
-
         if (state[rooms[client.id]]) {
 
             let room = rooms[client.id];
@@ -135,10 +128,8 @@ io.on("connection", client => {
                 return delete rooms[client.id];
             }
 
-
             delete state[rooms[client.id]].players[client.id];
             io.to(room).emit("players", state[rooms[client.id]]);
-            console.log(state[rooms[client.id]], "was sent to player");
             delete rooms[client.id];
         }
     })

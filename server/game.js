@@ -1,4 +1,3 @@
-
 module.exports = function computeWinner(playerOne, playerTwo) {
     if (playerOne.choice === playerTwo.choice) {
         return "draw";
