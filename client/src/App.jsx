@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { socket } from "./context/socket";
 import style from "style/app.module.scss";
-
-import { Hand, Scoreboard, Roomcode, Picker, Results } from "components";
+import { Hand, Scoreboard, Roomcode, Picker, Results, Errors } from "components";
 import Menu from "pages/Menu";
-
 import "style/global.scss";
 
 export default function App() {
@@ -13,11 +11,13 @@ export default function App() {
     const [winner, setWinner] = useState(false);
     const [room, setRoom] = useState("");
     const [color, setColor] = useState(undefined);
+    const path = window.location.pathname.replace(/\//, "");
 
     useEffect(() => {
         socket.on("players", (playerData, room) => {
             setPlayers(playerData);
             setRoom(room);
+            window.history.replaceState("", "", room);
         })
 
         socket.on("rps-winner", (gameWinner) => {
@@ -78,7 +78,8 @@ export default function App() {
             </div>
 
             <Picker color={color} active={winner} />
-            <Menu parentCallback={callback} active={room ? false : true} />
+            <Menu parentCallback={callback} active={room ? false : true} path={path} />
+            <Errors />
             {/* <span className={style.names}>{JSON.stringify(players)}</span> */}
         </>
 

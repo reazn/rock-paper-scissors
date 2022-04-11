@@ -1,19 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import style from "style/pages/menu.module.scss";
 import { socket } from "../context/socket";
 
-export default function Menu({ parentCallback, active = true }) {
+export default function Menu({ parentCallback, active = true, path }) {
 
-    const [code, setCode] = useState("");
+    const [code, setCode] = useState(path);
     const [name, setName] = useState("");
     const [chosenColor, setChosenColor] = useState({ "yellow": "#D3B542" });
-
-    useEffect(() => {
-        socket.on("error", (error) => {
-            console.log(error);
-        })
-    }, [])
 
     function createRoom(pname, pcolor) {
         socket.emit("create-room", pname, pcolor);
