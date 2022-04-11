@@ -1,0 +1,20 @@
+.errors {
+    position: absolute;
+    bottom: 2em;
+    left: -100%;
+    transition: left 0.5s ease-in-out;
+    background-color: rgb(245, 81, 81);
+    border-radius: 0.4em;
+    z-index: 1;
+    
+    p {
+        color: white;
+        margin: 0;
+        padding: 1em;
+        font-weight: 500;
+    }
+}
+
+.active {
+    left: 2em;
+}

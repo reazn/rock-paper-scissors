@@ -41,6 +41,7 @@ io.on("connection", client => {
     })
 
     client.on("join-room", (room, name, color) => {
+        if (!room) { return client.emit("error", `No room code was provided.`) }
         if (!name) { name = "Player 2" }
         if (!color) { color = "yellow" }
 
