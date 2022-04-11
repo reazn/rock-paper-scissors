@@ -13,7 +13,7 @@ export default function Hand({ type = "rock", left, color = "yellow", active, mo
                 moving ? style.moving : "",
                 active ? "" : activeHand,
             ].join(" ")}
-                src={`/images/hands/${color}-${type}.png`} />
+                src={`./images/hands/${color}-${type}.png`} />
         </div>
     );
 }

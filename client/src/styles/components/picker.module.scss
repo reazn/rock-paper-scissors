@@ -3,6 +3,9 @@
     bottom: -100%;
     width: 100%;
     transition: bottom 0.5s ease-in-out;
+    max-width: 1500px;
+    left: 50%;
+    transform: translateX(-50%);
 
     .options {
         display: flex;

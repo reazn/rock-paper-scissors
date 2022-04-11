@@ -3,25 +3,24 @@ import { useState, useEffect } from "react";
 import style from "style/pages/menu.module.scss";
 import { socket } from "../context/socket";
 
-export default function Menu({ parentCallback }) {
+export default function Menu({ parentCallback, active = true }) {
 
     const [code, setCode] = useState("");
     const [name, setName] = useState("");
     const [chosenColor, setChosenColor] = useState({ "yellow": "#D3B542" });
-    const [showMenu, setShowMenu] = useState(true);
 
-    function test() {
-        socket.emit("getinfo", "pp");
-    }
+    useEffect(() => {
+        socket.on("error", (error) => {
+            console.log(error);
+        })
+    }, [])
 
     function createRoom(pname, pcolor) {
         socket.emit("create-room", pname, pcolor);
-        setShowMenu(false);
     }
 
     function joinRoom(input, pname, pcolor) {
         socket.emit("join-room", input, pname, pcolor);
-        setShowMenu(false);
     }
 
     let colors = [
@@ -36,7 +35,7 @@ export default function Menu({ parentCallback }) {
     ];
 
     return (
-        <div className={[style.menu, showMenu ? "" : style.hide].join(" ")}>
+        <div className={[style.menu, active ? "" : style.hide].join(" ")}>
 
             <div className={style.title}>
                 <span className={style.rock}>rock</span>
@@ -93,7 +92,7 @@ export default function Menu({ parentCallback }) {
                     <button
                         className={style.button}
                         style={{ backgroundColor: Object.values(chosenColor) }}
-                        onClick={() => joinRoom(code, name, Object.keys(chosenColor)[0])}
+                        onClick={() => joinRoom(code.toUpperCase(), name, Object.keys(chosenColor)[0])}
                     >
                         Join
                     </button>

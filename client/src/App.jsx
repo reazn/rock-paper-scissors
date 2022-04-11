@@ -10,7 +10,7 @@ import "style/global.scss";
 export default function App() {
 
     const [players, setPlayers] = useState({ players: {} });
-    const [winner, setWinner] = useState("");
+    const [winner, setWinner] = useState(false);
     const [room, setRoom] = useState("");
     const [color, setColor] = useState(undefined);
 
@@ -24,7 +24,7 @@ export default function App() {
             setTimeout(() => {
                 setWinner(gameWinner);
                 setTimeout(() => {
-                    setWinner("");
+                    setWinner(false);
                     socket.emit("rps-reset");
                 }, 3000);
             }, 3000);
@@ -78,7 +78,7 @@ export default function App() {
             </div>
 
             <Picker color={color} active={winner} />
-            <Menu parentCallback={callback} />
+            <Menu parentCallback={callback} active={room ? false : true} />
             {/* <span className={style.names}>{JSON.stringify(players)}</span> */}
         </>
 

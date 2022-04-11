@@ -10,7 +10,6 @@ export default function Roomcode({ code }) {
                 <span className={style.code}>{code ? code : "error"}</span>
                 <Clipboard className={style.icon} />
             </div>
-
         </>
     );
 }

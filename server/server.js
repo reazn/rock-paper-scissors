@@ -53,11 +53,11 @@ io.on("connection", client => {
         }
 
         if (numClients === 0) {
-            return io.to(client.id).emit("no-room");
+            return client.emit("error", `A room with code ${room} does not exist.`);
         }
 
         if (numClients > 1) {
-            return io.to(client.id).emit("full");
+            return client.emit("error", "That room is full.");
         }
 
         rooms[client.id] = room;

@@ -1,12 +1,5 @@
-import React from "react";
 import io from "socket.io-client";
-export const socket = io("ws://localhost:6969");
-// export const SocketContext = React.createContext()
 
-// export function createRoom() {
-    // socket.emit("create-room")
-// }
-
-// export function joinRoom(room) {
-    // socket.emit("join-room", room)
-// }
+export const socket = process.env.NODE_ENV === "production"
+    ? io("https://reazn.me", { path: "/rpssocket" })
+    : io("ws://localhost:6969");
