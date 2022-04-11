@@ -13,7 +13,6 @@ export default function Picker({ active, color = "yellow" }) {
 
     useEffect(() => {
         setActive(active === false);
-        console.log(active)
     }, [active])
 
     return (

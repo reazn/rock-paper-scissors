@@ -95,7 +95,6 @@
         .colorpicker {
             display: flex;
             justify-content: space-between;
-            // gap: .2em;
             list-style-type: none;
 
             .color {
@@ -108,7 +107,6 @@
                 z-index: 0;
 
                 &:hover {
-                    // outline: 2px solid white;
                     transform: scale(1.2);
                 }
             }
