@@ -11,7 +11,7 @@ export default function App() {
     const [winner, setWinner] = useState(false);
     const [room, setRoom] = useState("");
     const [color, setColor] = useState(undefined);
-    const path = window.location.pathname.replace(/\//, "");
+    const path = window.location.pathname.replace(/^.+\//, "");
 
     useEffect(() => {
         socket.on("players", (playerData, room) => {
