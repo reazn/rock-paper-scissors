@@ -48,7 +48,9 @@ export default function Menu({ parentCallback, active = true, path }) {
                     autoComplete="off"
                 />
 
-                <label htmlFor="colors" style={{ marginBottom: "10px" }}>SKIN</label>
+                <label htmlFor="colors" style={{ marginBottom: "10px" }}>
+                    SKIN
+                </label>
 
                 <ul className={style.colorpicker} id="colors">
                     {colors.map((color, index) => {
@@ -57,7 +59,11 @@ export default function Menu({ parentCallback, active = true, path }) {
                                 setChosenColor(color);
                                 parentCallback(Object.keys(color)[0]);
                             }}
-                            className={[style.color, Object.keys(chosenColor)[0] == Object.keys(color) ? style.active : ""].join(" ")}
+                            className={[style.color,
+                            Object.keys(chosenColor)[0] == Object.keys(color)
+                                ? style.active
+                                : ""
+                            ].join(" ")}
                             style={{ backgroundColor: Object.values(color) }}
                         />
                     })}
@@ -86,14 +92,19 @@ export default function Menu({ parentCallback, active = true, path }) {
                     <button
                         className={style.button}
                         style={{ backgroundColor: Object.values(chosenColor) }}
-                        onClick={() => joinRoom(code.toUpperCase(), name, Object.keys(chosenColor)[0])}
+                        onClick={
+                            () =>
+                                joinRoom(
+                                    code.toUpperCase(),
+                                    name,
+                                    Object.keys(chosenColor)[0]
+                                )}
                     >
                         Join
                     </button>
                 </div>
 
             </div>
-
         </div>
     );
 }

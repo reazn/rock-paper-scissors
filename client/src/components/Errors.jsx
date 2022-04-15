@@ -21,6 +21,5 @@ export default function Errors() {
         <div className={[style.errors, message ? style.active : ""].join(" ")} >
             <p>{message}</p>
         </div>
-    )
-
+    );
 }

@@ -18,6 +18,6 @@ export default function Results({ winner, draw }) {
                     </div>
                 }
             </div>
-        </div >
-    )
+        </div>
+    );
 }

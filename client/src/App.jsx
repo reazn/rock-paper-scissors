@@ -11,6 +11,7 @@ export default function App() {
     const [winner, setWinner] = useState(false);
     const [room, setRoom] = useState("");
     const [color, setColor] = useState(undefined);
+
     const path = window.location.pathname.replace(/^.+\//, "");
 
     useEffect(() => {
@@ -42,7 +43,7 @@ export default function App() {
     }
 
     const callback = useCallback((colors) => {
-        setColor(colors)
+        setColor(colors);
     }, [])
 
     return (
@@ -80,8 +81,6 @@ export default function App() {
             <Picker color={color} active={winner} />
             <Menu parentCallback={callback} active={room ? false : true} path={path} />
             <Errors />
-            {/* <span className={style.names}>{JSON.stringify(players)}</span> */}
         </>
-
     );
 }

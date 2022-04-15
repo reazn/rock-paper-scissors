@@ -20,6 +20,7 @@ io.on("connection", client => {
         if (rooms[client.id]) return;
         if (!name) { name = "Player 1" }
         if (!color) { color = "yellow" }
+
         let room = newId();
 
         client.emit("room-code", room);
@@ -41,7 +42,10 @@ io.on("connection", client => {
     })
 
     client.on("join-room", (room, name, color) => {
-        if (!room) { return client.emit("error", `No room code was provided.`) }
+        if (!room) {
+            return client.emit("error", `No room code was provided.`)
+        }
+
         if (!name) { name = "Player 2" }
         if (!color) { color = "yellow" }
 
@@ -62,6 +66,7 @@ io.on("connection", client => {
         }
 
         rooms[client.id] = room;
+
         Object.assign(state[room].players, {
             [client.id]: {
                 name: name,
