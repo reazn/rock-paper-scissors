@@ -5,7 +5,7 @@
 </p>
 
 ## Live Demo
-[reazn.me/rps](https://reazn.me/rps/)
+[reazn.dev/rps](https://reazn.dev/rps/)
 
 ## Installation
 
