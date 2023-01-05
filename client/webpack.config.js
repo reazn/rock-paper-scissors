@@ -32,6 +32,7 @@ module.exports = (env, argv) => {
       isDevelopment && new ReactRefreshPlugin(),
       new HtmlWebpackPlugin({
         filename: "./index.html",
+        favicon: "./public/favicon.png",
         template: "./public/index.html",
       }),
     ].filter(Boolean),
